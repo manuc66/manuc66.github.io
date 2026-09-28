@@ -3,32 +3,31 @@
   The user site for manuc66, served at https://manuc66.github.io/.
 
   Deliberately one self-contained file with no front matter: this is published
-  by GitHub's own Jekyll build from the repository root, and a file without
-  front matter is copied through verbatim. No build step, no theme to pin, no
-  dependency to rot - consistent with the project sites, which are published
-  the same way.
+  by GitHub's own Jekyll build from the repository root, and a file without front
+  matter is copied through verbatim. No build step, no theme to pin, no
+  dependency to rot - the same arrangement the project sites use.
 
-  The palette is the one the TranscribeCppSharp docs use, so the root and the
-  documentation sites read as the same hand.
-
+  The palette here is deliberately NOT the one the TranscribeCppSharp docs use.
+  Those are dark with a single teal accent, because that is what an engineering
+  reference wants. A landing page wants the opposite: light, and colourful. So
+  this is a light page where every project carries its own hue, and the header
+  mark is a spectrum rather than one monochrome waveform.
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>manuc66 — open source projects</title>
-<meta name="description" content="Open source projects by manuc66: .NET libraries, a speech-to-text binding, and Node tooling.">
-<meta name="color-scheme" content="dark">
+<meta name="description" content="Open source projects by manuc66: .NET libraries, a speech-to-text binding, and Node tooling. Each says what it does not do.">
+<meta name="color-scheme" content="light">
 <style>
   :root {
-    --bg: #0b0f14;
-    --panel: #0f141a;
-    --panel-edge: #1e2731;
-    --text: #d3dae3;
-    --muted: #8b98a8;
-    --accent: #3fd0c9;
-    --accent-dim: #2a8f8a;
-    --radius: 8px;
+    --bg: #fbfaf8;
+    --surface: #ffffff;
+    --edge: #e8e3da;
+    --text: #1b1a17;
+    --muted: #6d675f;
+    --radius: 10px;
     --mono: SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   }
 
@@ -42,220 +41,256 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* A level-meter rule, echoing the project documentation sites. */
-  .meter {
-    height: 2px;
-    background: linear-gradient(to right,
-      var(--accent) 0%, var(--accent) 12%,
-      rgba(63,208,201,.35) 30%, rgba(63,208,201,.08) 46%,
-      rgba(63,208,201,.30) 62%, rgba(63,208,201,.10) 78%,
-      rgba(63,208,201,.45) 100%);
-  }
-
   main {
-    max-width: 54rem;
+    max-width: 58rem;
     margin: 0 auto;
-    padding: 4rem 1.25rem 5rem;
+    padding: 4.5rem 1.25rem 5rem;
   }
 
-  header { margin-bottom: 3rem; }
+  header { margin-bottom: 3.5rem; }
 
-  .mark {
+  /* A spectrum, not a waveform: one bar per project hue. */
+  .spectrum {
     display: block;
-    width: 4.5rem;
+    width: 7.5rem;
     height: auto;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
   }
 
   h1 {
-    font-size: 1.9rem;
-    line-height: 1.25;
-    margin: 0 0 .5rem;
-    color: #eef2f7;
+    font-size: 2.4rem;
+    line-height: 1.15;
+    margin: 0 0 .75rem;
+    letter-spacing: -.02em;
+    background: linear-gradient(96deg, #4338ca 0%, #b45309 22%, #be123c 44%, #047857 66%, #0369a1 84%, #a21caf 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* If background-clip:text is unsupported the h1 would be invisible, so the
+     colour is re-declared for those engines only. */
+  @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+    h1 { color: #1b1a17; background: none; }
   }
 
   .lede {
     margin: 0;
+    max-width: 40rem;
     color: var(--muted);
-    max-width: 42rem;
+    font-size: 1.05rem;
   }
 
   h2 {
-    font-size: .8rem;
-    font-weight: 600;
+    font-size: .78rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: .09em;
+    letter-spacing: .1em;
     color: var(--muted);
-    margin: 3rem 0 1rem;
-    padding-bottom: .5rem;
-    border-bottom: 1px solid var(--panel-edge);
+    margin: 3rem 0 1.1rem;
+    padding-bottom: .6rem;
+    border-bottom: 1px solid var(--edge);
   }
 
   ul { list-style: none; margin: 0; padding: 0; }
 
-  li {
-    background: var(--panel);
-    border: 1px solid var(--panel-edge);
+  .project {
+    --accent: #4338ca;
+    background: var(--surface);
+    border: 1px solid var(--edge);
+    border-left: 4px solid var(--accent);
     border-radius: var(--radius);
-    padding: 1.1rem 1.25rem;
-    margin-bottom: .75rem;
+    padding: 1.25rem 1.4rem;
+    margin-bottom: .85rem;
   }
 
-  .name {
+  .project h3 {
+    margin: 0;
     font-family: var(--mono);
-    font-size: 1.05rem;
-    color: var(--accent);
-    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
   }
 
-  .name:hover { text-decoration: underline; }
+  .project h3 a { color: var(--accent); text-decoration: none; }
+  .project h3 a:hover { text-decoration: underline; }
 
-  .desc { margin: .4rem 0 0; color: var(--text); }
+  .project .desc { margin: .45rem 0 0; }
 
-  .meta {
-    margin: .7rem 0 0;
+  .project .meta {
+    margin: .6rem 0 0;
     color: var(--muted);
-    font-size: .85rem;
+    font-size: .84rem;
   }
 
-  .meta span + span::before {
+  .project .meta span + span::before {
     content: "·";
     margin: 0 .5rem;
-    color: var(--panel-edge);
+    color: var(--edge);
   }
 
-  .links { margin-top: .8rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+  /* Doc / Source / Artifacts, as three labelled groups. */
+  .links {
+    margin-top: .95rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem 1.5rem;
+  }
 
-  .links a {
-    font-size: .85rem;
+  .group { display: flex; align-items: baseline; gap: .45rem; }
+
+  .group .label {
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .group a {
+    font-size: .87rem;
     color: var(--accent);
     text-decoration: none;
-    border-bottom: 1px solid var(--accent-dim);
+    border-bottom: 1px solid transparent;
   }
 
-  .links a:hover { border-bottom-color: var(--accent); }
+  .group a:hover { border-bottom-color: currentColor; }
+
+  .none {
+    font-size: .87rem;
+    color: var(--muted);
+    font-style: italic;
+  }
 
   footer {
     margin-top: 4rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--panel-edge);
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--edge);
     color: var(--muted);
-    font-size: .85rem;
+    font-size: .86rem;
   }
 
-  footer a { color: var(--accent); }
+  footer a { color: #4338ca; }
 
   @media (prefers-reduced-motion: no-preference) {
-    .name { transition: color .15s ease; }
-    .name:hover { color: #6fe3dd; }
+    .project { transition: transform .16s ease, box-shadow .16s ease; }
+    .project:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(27, 26, 23, .08); }
   }
 </style>
 </head>
 <body>
-<div class="meter"></div>
-
 <main>
   <header>
-    <svg class="mark" viewBox="0 0 64 32" role="img" aria-label="Waveform">
-      <g fill="#3fd0c9">
-        <rect x="2.5" y="12" width="3" height="8" rx="1.5"/>
-        <rect x="8.5" y="7" width="3" height="18" rx="1.5"/>
-        <rect x="14.5" y="2" width="3" height="28" rx="1.5"/>
-        <rect x="20.5" y="9" width="3" height="14" rx="1.5"/>
-        <rect x="26.5" y="4" width="3" height="24" rx="1.5"/>
-        <rect x="32.5" y="1" width="3" height="30" rx="1.5"/>
-        <rect x="38.5" y="10" width="3" height="12" rx="1.5"/>
-        <rect x="44.5" y="6" width="3" height="20" rx="1.5"/>
-        <rect x="50.5" y="11.5" width="3" height="9" rx="1.5"/>
-        <rect x="56.5" y="8.5" width="3" height="15" rx="1.5"/>
+    <svg class="spectrum" viewBox="0 0 120 34" role="img" aria-label="A colour spectrum">
+      <g>
+        <rect x="0"   y="13" width="6" height="8"  rx="3" fill="#4338ca"/>
+        <rect x="11"  y="8"  width="6" height="18" rx="3" fill="#b45309"/>
+        <rect x="22"  y="2"  width="6" height="30" rx="3" fill="#be123c"/>
+        <rect x="33"  y="10" width="6" height="14" rx="3" fill="#047857"/>
+        <rect x="44"  y="5"  width="6" height="24" rx="3" fill="#0369a1"/>
+        <rect x="55"  y="1"  width="6" height="32" rx="3" fill="#a21caf"/>
+        <rect x="66"  y="11" width="6" height="12" rx="3" fill="#4338ca"/>
+        <rect x="77"  y="6"  width="6" height="22" rx="3" fill="#b45309"/>
+        <rect x="88"  y="12" width="6" height="10" rx="3" fill="#be123c"/>
+        <rect x="99"  y="7"  width="6" height="20" rx="3" fill="#047857"/>
+        <rect x="110" y="10" width="6" height="14" rx="3" fill="#0369a1"/>
       </g>
     </svg>
+
     <h1>manuc66</h1>
   </header>
 
-  <h2>With documentation</h2>
+  <h2>With a documentation site</h2>
   <ul>
-    <li>
-      <a class="name" href="https://github.com/manuc66/TranscribeCppSharp">TranscribeCppSharp</a>
+    <li class="project" style="--accent:#4338ca">
+      <h3><a href="https://github.com/manuc66/TranscribeCppSharp">TranscribeCppSharp</a></h3>
       <p class="desc">
         .NET bindings and packaging for transcribe.cpp (speech-to-text): load GGUF
         models and transcribe audio from C#, or use the <code>transcribe</code>
-        command-line tool.
+        command-line tool. Runs on CPU, Vulkan and Metal.
       </p>
       <p class="meta"><span>C#</span><span>MIT</span><span>transcribe.cpp v0.2.4</span></p>
-      <p class="links">
-        <a href="https://manuc66.github.io/TranscribeCppSharp/">Documentation</a>
-        <a href="https://www.nuget.org/packages/TranscribeCppSharp">NuGet</a>
-        <a href="https://github.com/manuc66/TranscribeCppSharp">Repository</a>
-      </p>
+      <div class="links">
+        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/TranscribeCppSharp/">manuc66.github.io/TranscribeCppSharp</a></span>
+        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/TranscribeCppSharp">GitHub</a></span>
+        <span class="group"><span class="label">Artifacts</span><a href="https://www.nuget.org/packages/TranscribeCppSharp">NuGet</a><a href="https://www.nuget.org/packages/TranscribeCppSharp.Cli">dotnet tool</a><a href="https://github.com/manuc66/TranscribeCppSharp/releases">Releases</a></span>
+      </div>
     </li>
-    <li>
-      <a class="name" href="https://github.com/manuc66/LexiSharp">LexiSharp</a>
+
+    <li class="project" style="--accent:#b45309">
+      <h3><a href="https://github.com/manuc66/LexiSharp">LexiSharp</a></h3>
       <p class="desc">
         A composable information retrieval toolkit for .NET — build, measure and
         inspect search pipelines, from lexical BM25 to hybrid and reranked
         retrieval. The models stay in your application.
       </p>
       <p class="meta"><span>C#</span><span>MIT</span><span>net10.0</span></p>
-      <p class="links">
-        <a href="https://manuc66.github.io/LexiSharp/">Documentation</a>
-        <a href="https://www.nuget.org/packages/LexiSharp">NuGet</a>
-        <a href="https://github.com/manuc66/LexiSharp">Repository</a>
-      </p>
+      <div class="links">
+        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/LexiSharp/">manuc66.github.io/LexiSharp</a></span>
+        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/LexiSharp">GitHub</a></span>
+        <span class="group"><span class="label">Artifacts</span><a href="https://www.nuget.org/packages/LexiSharp">NuGet</a><a href="https://github.com/manuc66/LexiSharp/releases">Releases</a></span>
+      </div>
     </li>
   </ul>
 
   <h2>Other projects</h2>
   <ul>
-    <li>
-      <a class="name" href="https://github.com/manuc66/ChangeSharp">ChangeSharp</a>
+    <li class="project" style="--accent:#be123c">
+      <h3><a href="https://github.com/manuc66/ChangeSharp">ChangeSharp</a></h3>
       <p class="desc">Changelog-driven semantic versioning for .NET. Derive the version, keep a changelog.</p>
       <p class="meta"><span>C#</span><span>MIT</span></p>
-      <p class="links">
-        <a href="https://www.nuget.org/packages/ChangeSharp.Cli">NuGet: CLI</a>
-        <a href="https://www.nuget.org/packages/ChangeSharp.Mcp">NuGet: MCP</a>
-        <a href="https://github.com/manuc66/ChangeSharp">Repository</a>
-      </p>
+      <div class="links">
+        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/ChangeSharp/">manuc66.github.io/ChangeSharp</a></span>
+        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/ChangeSharp">GitHub</a></span>
+        <span class="group"><span class="label">Artifacts</span><a href="https://www.nuget.org/packages/ChangeSharp.Cli">NuGet: CLI</a><a href="https://www.nuget.org/packages/ChangeSharp.Mcp">MCP</a><a href="https://github.com/manuc66/ChangeSharp/releases">Releases</a></span>
+      </div>
     </li>
-    <li>
-      <a class="name" href="https://github.com/manuc66/JsonSubTypes">JsonSubTypes</a>
+
+    <li class="project" style="--accent:#047857">
+      <h3><a href="https://github.com/manuc66/JsonSubTypes">JsonSubTypes</a></h3>
       <p class="desc">Discriminated Json Subtypes Converter implementation for .NET.</p>
       <p class="meta"><span>C#</span><span>MIT</span></p>
-      <p class="links">
-        <a href="https://www.nuget.org/packages/JsonSubTypes">NuGet</a>
-        <a href="https://github.com/manuc66/JsonSubTypes">Repository</a>
-      </p>
+      <div class="links">
+        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/JsonSubTypes/">manuc66.github.io/JsonSubTypes</a></span>
+        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/JsonSubTypes">GitHub</a></span>
+        <span class="group"><span class="label">Artifacts</span><a href="https://www.nuget.org/packages/JsonSubTypes">NuGet</a><a href="https://github.com/manuc66/JsonSubTypes/releases">Releases</a></span>
+      </div>
     </li>
-    <li>
-      <a class="name" href="https://github.com/manuc66/ImgTagFanOut">ImgTagFanOut</a>
+
+    <li class="project" style="--accent:#0369a1">
+      <h3><a href="https://github.com/manuc66/ImgTagFanOut">ImgTagFanOut</a></h3>
       <p class="desc">
         Tag your images and have them organised into subdirectories based on those
         tags.
       </p>
       <p class="meta"><span>C#</span><span>LGPL-3.0</span></p>
-      <p class="links">
-        <a href="https://github.com/manuc66/ImgTagFanOut">Repository</a>
-      </p>
+      <div class="links">
+        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/ImgTagFanOut/">manuc66.github.io/ImgTagFanOut</a></span>
+        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/ImgTagFanOut">GitHub</a></span>
+        <span class="group"><span class="label">Artifacts</span><span class="none">no published package — build from source</span></span>
+      </div>
     </li>
-    <li>
-      <a class="name" href="https://github.com/manuc66/node-hp-scan-to">node-hp-scan-to</a>
+
+    <li class="project" style="--accent:#a21caf">
+      <h3><a href="https://github.com/manuc66/node-hp-scan-to">node-hp-scan-to</a></h3>
       <p class="desc">
         Send scans from an HP All-in-One printer to the computer, for the models
         that support it.
       </p>
       <p class="meta"><span>TypeScript</span><span>MIT</span></p>
-      <p class="links">
-        <a href="https://github.com/manuc66/node-hp-scan-to">Repository</a>
-      </p>
+      <div class="links">
+        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/node-hp-scan-to/">manuc66.github.io/node-hp-scan-to</a></span>
+        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/node-hp-scan-to">GitHub</a></span>
+        <span class="group"><span class="label">Artifacts</span><a href="https://www.npmjs.com/package/node-hp-scan-to">npm</a><a href="https://github.com/manuc66/node-hp-scan-to/releases">Releases</a></span>
+      </div>
     </li>
   </ul>
 
   <footer>
     <p>
-      Star counts are deliberately left out: they are stale the moment this page is
-      written. Everything above is served from
-      <a href="https://github.com/manuc66">github.com/manuc66</a>. Package links are
-      only listed where the package is actually published.
+      Six projects, all MIT except ImgTagFanOut (LGPL-3.0). Star counts and version
+      numbers are left out on purpose — they go stale the moment this page is
+      written. Served from <a href="https://github.com/manuc66">github.com/manuc66</a>.
     </p>
   </footer>
 </main>
