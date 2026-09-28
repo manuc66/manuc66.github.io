@@ -8,17 +8,31 @@
   dependency to rot - the same arrangement the project sites use.
 
   The palette here is deliberately NOT the one the TranscribeCppSharp docs use.
-  Those are dark with a single teal accent, because that is what an engineering
-  reference wants. A landing page wants the opposite: light, and colourful. So
-  this is a light page where every project carries its own hue, and the header
-  mark is a spectrum rather than one monochrome waveform.
+  Those are dark with a single teal accent, chosen for an engineering reference
+  where the content is specifications. A landing page wants the opposite, so
+  this is light and colourful, and each project carries its own hue.
+
+  ORDER. Projects are ordered by traction, measured as GitHub stars and
+  tie-broken on releases published. Every input to that order is printed on the
+  card - stars, releases, contributors, last update - because an ordering whose
+  key is invisible is not an ordering anybody can argue with.
+
+  The counts are a snapshot taken on the date in the footer, and stars move
+  continuously. They are shown rather than used as a hidden sort key for
+  exactly that reason: a visible number with a visible date can be judged stale;
+  a hidden one cannot.
+
+  Version numbers are omitted throughout. They are checked when written and
+  would be wrong by the next release, so the page names the channel (NuGet,
+  npm, Releases) instead of pinning a number.
+
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>manuc66 — open source projects</title>
-<meta name="description" content="Open source projects by manuc66: .NET libraries, a speech-to-text binding, and Node tooling. Each says what it does not do.">
+<meta name="description" content="Open source projects by manuc66: .NET libraries, a speech-to-text binding, and Node tooling, ordered by traction. Each says what it does not do.">
 <meta name="color-scheme" content="light">
 <style>
   :root {
@@ -47,9 +61,8 @@
     padding: 4.5rem 1.25rem 5rem;
   }
 
-  header { margin-bottom: 3.5rem; }
+  header { margin-bottom: 3rem; }
 
-  /* A spectrum, not a waveform: one bar per project hue. */
   .spectrum {
     display: block;
     width: 7.5rem;
@@ -68,31 +81,33 @@
     color: transparent;
   }
 
-  /* If background-clip:text is unsupported the h1 would be invisible, so the
-     colour is re-declared for those engines only. */
+  /* If background-clip:text is unsupported the h1 would render invisible, so
+     the colour is restored for those engines only. */
   @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
     h1 { color: #1b1a17; background: none; }
   }
 
   .lede {
-    margin: 0;
+    margin: 0 0 1.25rem;
     max-width: 40rem;
     color: var(--muted);
     font-size: 1.05rem;
   }
 
-  h2 {
-    font-size: .78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .1em;
+  /* The sort key, stated once, above the list it governs. */
+  .key {
+    font-size: .85rem;
     color: var(--muted);
-    margin: 3rem 0 1.1rem;
-    padding-bottom: .6rem;
-    border-bottom: 1px solid var(--edge);
+    background: var(--surface);
+    border: 1px solid var(--edge);
+    border-radius: var(--radius);
+    padding: .7rem 1rem;
+    margin: 0;
   }
 
-  ul { list-style: none; margin: 0; padding: 0; }
+  .key b { color: var(--text); font-weight: 600; }
+
+  ul { list-style: none; margin: 1.5rem 0 0; padding: 0; }
 
   .project {
     --accent: #4338ca;
@@ -115,19 +130,29 @@
   .project h3 a { color: var(--accent); text-decoration: none; }
   .project h3 a:hover { text-decoration: underline; }
 
-  .project .desc { margin: .45rem 0 0; }
+  .rank {
+    display: inline-block;
+    min-width: 1.6rem;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: .95rem;
+  }
 
-  .project .meta {
+  .desc { margin: .45rem 0 0; }
+
+  .meta {
     margin: .6rem 0 0;
     color: var(--muted);
     font-size: .84rem;
   }
 
-  .project .meta span + span::before {
+  .meta span + span::before {
     content: "·";
     margin: 0 .5rem;
     color: var(--edge);
   }
+
+  .star { color: var(--accent); }
 
   /* Doc / Source / Artifacts, as three labelled groups. */
   .links {
@@ -137,7 +162,7 @@
     gap: .4rem 1.5rem;
   }
 
-  .group { display: flex; align-items: baseline; gap: .45rem; }
+  .group { display: flex; align-items: baseline; flex-wrap: wrap; gap: .45rem; }
 
   .group .label {
     font-size: .7rem;
@@ -156,14 +181,10 @@
 
   .group a:hover { border-bottom-color: currentColor; }
 
-  .none {
-    font-size: .87rem;
-    color: var(--muted);
-    font-style: italic;
-  }
+  .none { font-size: .87rem; color: var(--muted); font-style: italic; }
 
   footer {
-    margin-top: 4rem;
+    margin-top: 3.5rem;
     padding-top: 1.6rem;
     border-top: 1px solid var(--edge);
     color: var(--muted);
@@ -200,16 +221,80 @@
     <h1>manuc66</h1>
   </header>
 
-  <h2>With a documentation site</h2>
   <ul>
+    <li class="project" style="--accent:#047857">
+      <h3><span class="rank">1.</span><a href="https://github.com/manuc66/JsonSubTypes">JsonSubTypes</a></h3>
+      <p class="desc">Discriminated Json Subtypes Converter implementation for .NET.</p>
+      <p class="meta">
+        <span>C#</span><span>MIT</span>
+        <span><span class="star">★ 434</span> stars</span><span>18 releases</span><span>16 contributors</span><span>updated 2026-09-28</span>
+      </p>
+      <div class="links">
+        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/JsonSubTypes/">manuc66.github.io/JsonSubTypes</a></span>
+        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/JsonSubTypes">GitHub</a></span>
+        <span class="group"><span class="label">Artifacts</span><a href="https://www.nuget.org/packages/JsonSubTypes">NuGet</a><a href="https://github.com/manuc66/JsonSubTypes/releases">Releases</a></span>
+      </div>
+    </li>
+
+    <li class="project" style="--accent:#a21caf">
+      <h3><span class="rank">2.</span><a href="https://github.com/manuc66/node-hp-scan-to">node-hp-scan-to</a></h3>
+      <p class="desc">
+        Send scans from an HP All-in-One printer to the computer, for the models
+        that support it.
+      </p>
+      <p class="meta">
+        <span>TypeScript</span><span>MIT</span>
+        <span><span class="star">★ 303</span> stars</span><span>30 releases</span><span>30 contributors</span><span>updated 2026-09-28</span>
+      </p>
+      <div class="links">
+        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/node-hp-scan-to/">manuc66.github.io/node-hp-scan-to</a></span>
+        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/node-hp-scan-to">GitHub</a></span>
+        <span class="group"><span class="label">Artifacts</span><a href="https://www.npmjs.com/package/node-hp-scan-to">npm</a><a href="https://github.com/manuc66/node-hp-scan-to/releases">Releases</a></span>
+      </div>
+    </li>
+
+    <li class="project" style="--accent:#0369a1">
+      <h3><span class="rank">3.</span><a href="https://github.com/manuc66/ImgTagFanOut">ImgTagFanOut</a></h3>
+      <p class="desc">
+        Tag your images and have them organised into subdirectories based on those
+        tags.
+      </p>
+      <p class="meta">
+        <span>C#</span><span>LGPL-3.0</span>
+        <span><span class="star">★ 2</span> stars</span><span>no releases</span><span>5 contributors</span><span>updated 2026-09-28</span>
+      </p>
+      <div class="links">
+        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/ImgTagFanOut/">manuc66.github.io/ImgTagFanOut</a></span>
+        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/ImgTagFanOut">GitHub</a></span>
+        <span class="group"><span class="label">Artifacts</span><span class="none">no published package — build from source</span></span>
+      </div>
+    </li>
+
+    <li class="project" style="--accent:#be123c">
+      <h3><span class="rank">4.</span><a href="https://github.com/manuc66/ChangeSharp">ChangeSharp</a></h3>
+      <p class="desc">Changelog-driven semantic versioning for .NET. Derive the version, keep a changelog.</p>
+      <p class="meta">
+        <span>C#</span><span>MIT</span>
+        <span><span class="star">★ 1</span> stars</span><span>15 releases</span><span>1 contributor</span><span>updated 2026-08-22</span>
+      </p>
+      <div class="links">
+        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/ChangeSharp/">manuc66.github.io/ChangeSharp</a></span>
+        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/ChangeSharp">GitHub</a></span>
+        <span class="group"><span class="label">Artifacts</span><a href="https://www.nuget.org/packages/ChangeSharp.Cli">NuGet: CLI</a><a href="https://www.nuget.org/packages/ChangeSharp.Mcp">MCP</a><a href="https://github.com/manuc66/ChangeSharp/releases">Releases</a></span>
+      </div>
+    </li>
+
     <li class="project" style="--accent:#4338ca">
-      <h3><a href="https://github.com/manuc66/TranscribeCppSharp">TranscribeCppSharp</a></h3>
+      <h3><span class="rank">5.</span><a href="https://github.com/manuc66/TranscribeCppSharp">TranscribeCppSharp</a></h3>
       <p class="desc">
         .NET bindings and packaging for transcribe.cpp (speech-to-text): load GGUF
         models and transcribe audio from C#, or use the <code>transcribe</code>
         command-line tool. Runs on CPU, Vulkan and Metal.
       </p>
-      <p class="meta"><span>C#</span><span>MIT</span><span>transcribe.cpp v0.2.4</span></p>
+      <p class="meta">
+        <span>C#</span><span>MIT</span>
+        <span><span class="star">★ 1</span> stars</span><span>3 releases</span><span>3 contributors</span><span>updated 2026-09-28</span><span>binds transcribe.cpp v0.2.4</span>
+      </p>
       <div class="links">
         <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/TranscribeCppSharp/">manuc66.github.io/TranscribeCppSharp</a></span>
         <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/TranscribeCppSharp">GitHub</a></span>
@@ -218,13 +303,16 @@
     </li>
 
     <li class="project" style="--accent:#b45309">
-      <h3><a href="https://github.com/manuc66/LexiSharp">LexiSharp</a></h3>
+      <h3><span class="rank">6.</span><a href="https://github.com/manuc66/LexiSharp">LexiSharp</a></h3>
       <p class="desc">
         A composable information retrieval toolkit for .NET — build, measure and
         inspect search pipelines, from lexical BM25 to hybrid and reranked
         retrieval. The models stay in your application.
       </p>
-      <p class="meta"><span>C#</span><span>MIT</span><span>net10.0</span></p>
+      <p class="meta">
+        <span>C#</span><span>MIT</span>
+        <span><span class="star">★ 0</span> stars</span><span>6 releases</span><span>1 contributor</span><span>updated 2026-09-28</span><span>net10.0</span>
+      </p>
       <div class="links">
         <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/LexiSharp/">manuc66.github.io/LexiSharp</a></span>
         <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/LexiSharp">GitHub</a></span>
@@ -233,64 +321,13 @@
     </li>
   </ul>
 
-  <h2>Other projects</h2>
-  <ul>
-    <li class="project" style="--accent:#be123c">
-      <h3><a href="https://github.com/manuc66/ChangeSharp">ChangeSharp</a></h3>
-      <p class="desc">Changelog-driven semantic versioning for .NET. Derive the version, keep a changelog.</p>
-      <p class="meta"><span>C#</span><span>MIT</span></p>
-      <div class="links">
-        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/ChangeSharp/">manuc66.github.io/ChangeSharp</a></span>
-        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/ChangeSharp">GitHub</a></span>
-        <span class="group"><span class="label">Artifacts</span><a href="https://www.nuget.org/packages/ChangeSharp.Cli">NuGet: CLI</a><a href="https://www.nuget.org/packages/ChangeSharp.Mcp">MCP</a><a href="https://github.com/manuc66/ChangeSharp/releases">Releases</a></span>
-      </div>
-    </li>
-
-    <li class="project" style="--accent:#047857">
-      <h3><a href="https://github.com/manuc66/JsonSubTypes">JsonSubTypes</a></h3>
-      <p class="desc">Discriminated Json Subtypes Converter implementation for .NET.</p>
-      <p class="meta"><span>C#</span><span>MIT</span></p>
-      <div class="links">
-        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/JsonSubTypes/">manuc66.github.io/JsonSubTypes</a></span>
-        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/JsonSubTypes">GitHub</a></span>
-        <span class="group"><span class="label">Artifacts</span><a href="https://www.nuget.org/packages/JsonSubTypes">NuGet</a><a href="https://github.com/manuc66/JsonSubTypes/releases">Releases</a></span>
-      </div>
-    </li>
-
-    <li class="project" style="--accent:#0369a1">
-      <h3><a href="https://github.com/manuc66/ImgTagFanOut">ImgTagFanOut</a></h3>
-      <p class="desc">
-        Tag your images and have them organised into subdirectories based on those
-        tags.
-      </p>
-      <p class="meta"><span>C#</span><span>LGPL-3.0</span></p>
-      <div class="links">
-        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/ImgTagFanOut/">manuc66.github.io/ImgTagFanOut</a></span>
-        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/ImgTagFanOut">GitHub</a></span>
-        <span class="group"><span class="label">Artifacts</span><span class="none">no published package — build from source</span></span>
-      </div>
-    </li>
-
-    <li class="project" style="--accent:#a21caf">
-      <h3><a href="https://github.com/manuc66/node-hp-scan-to">node-hp-scan-to</a></h3>
-      <p class="desc">
-        Send scans from an HP All-in-One printer to the computer, for the models
-        that support it.
-      </p>
-      <p class="meta"><span>TypeScript</span><span>MIT</span></p>
-      <div class="links">
-        <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/node-hp-scan-to/">manuc66.github.io/node-hp-scan-to</a></span>
-        <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/node-hp-scan-to">GitHub</a></span>
-        <span class="group"><span class="label">Artifacts</span><a href="https://www.npmjs.com/package/node-hp-scan-to">npm</a><a href="https://github.com/manuc66/node-hp-scan-to/releases">Releases</a></span>
-      </div>
-    </li>
-  </ul>
-
   <footer>
     <p>
-      Six projects, all MIT except ImgTagFanOut (LGPL-3.0). Star counts and version
-      numbers are left out on purpose — they go stale the moment this page is
-      written. Served from <a href="https://github.com/manuc66">github.com/manuc66</a>.
+      Counts are a snapshot taken on <b>2026-09-28</b>, and stars move continuously —
+      treat them as a snapshot, not a live counter. Version numbers are omitted
+      throughout: each is correct only until the next release, so the pages name the
+      channel (NuGet, npm, Releases) instead. Served from
+      <a href="https://github.com/manuc66">github.com/manuc66</a>.
     </p>
   </footer>
 </main>
