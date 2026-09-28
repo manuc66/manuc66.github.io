@@ -9,15 +9,13 @@
 
   The palette here is deliberately NOT the one the TranscribeCppSharp docs use.
   Those are dark with a single teal accent, chosen for an engineering reference
-  where the content is specifications. A landing page wants the opposite, so
-  this is light and colourful, and each project carries its own hue.
+  where the content is specifications. This is a landing page, so it is light,
+  and each project carries its own hue.
 
-  "Last commit" is the date of the most recent commit, NOT pushed_at: pushed_at
-  counts branch and tag pushes, and overstated three of these by up to three
-  weeks.
-
-  Version numbers are omitted throughout. They are correct only until the next
-  release, so each project names its channel (NuGet, npm, Releases) instead.
+  Per-project counts are a snapshot; stars move continuously. "Last commit" is
+  the most recent commit, not pushed_at, which counts branch and tag pushes.
+  Version numbers are omitted: each is right only until the next release, so
+  the pages name the channel instead.
 
 -->
 <html lang="en">
@@ -25,7 +23,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>manuc66 — open source projects</title>
-<meta name="description" content="Open source projects by manuc66: .NET libraries, a speech-to-text binding, and Node tooling. Each says what it does not do.">
+<meta name="description" content="Open source projects by manuc66: .NET libraries, a speech-to-text binding, and Node tooling.">
 <meta name="color-scheme" content="light">
 <style>
   :root {
@@ -80,26 +78,7 @@
     h1 { color: #1b1a17; background: none; }
   }
 
-  .lede {
-    margin: 0 0 1.25rem;
-    max-width: 40rem;
-    color: var(--muted);
-    font-size: 1.05rem;
-  }
-
-  .key {
-    font-size: .88rem;
-    color: var(--muted);
-    background: var(--surface);
-    border: 1px solid var(--edge);
-    border-radius: var(--radius);
-    padding: .8rem 1rem;
-    margin: 0;
-  }
-
-  .key b { color: var(--text); font-weight: 600; }
-
-  ul { list-style: none; margin: 1.5rem 0 0; padding: 0; }
+  ul { list-style: none; margin: 0; padding: 0; }
 
   .project {
     --accent: #4338ca;
@@ -132,8 +111,7 @@
 
   .desc { margin: .45rem 0 0; }
 
-  /* Why this project sits where it does, when the star count disagrees. */
-  .why {
+  .note {
     margin: .5rem 0 0;
     font-size: .87rem;
     color: var(--muted);
@@ -141,7 +119,7 @@
     padding-left: .7rem;
   }
 
-  .why b { color: var(--text); font-weight: 600; }
+  .note b { color: var(--text); font-weight: 600; }
 
   .meta {
     margin: .6rem 0 0;
@@ -228,9 +206,13 @@
     <li class="project" style="--accent:#047857">
       <h3><span class="rank">1.</span><a href="https://github.com/manuc66/JsonSubTypes">JsonSubTypes</a></h3>
       <p class="desc">Discriminated Json Subtypes Converter implementation for .NET.</p>
+      <p class="note">
+        <b>Nine years old</b> and by far the most used of these: a discriminated-union
+        converter with 18 releases and 16 contributors.
+      </p>
       <p class="meta">
         <span>C#</span><span>MIT</span>
-        <span><span class="star">★ 434</span> stars</span><span>18 releases</span><span>16 contributors</span><span>last commit 2026-09-09</span><span>since 2017</span>
+        <span><span class="star">★ 434</span> stars</span><span>18 releases</span><span>16 contributors</span><span>since 2017</span>
       </p>
       <div class="links">
         <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/JsonSubTypes/">manuc66.github.io/JsonSubTypes</a></span>
@@ -245,9 +227,13 @@
         Send scans from an HP All-in-One printer to the computer, for the models
         that support it.
       </p>
+      <p class="note">
+        <b>The most collaborative project here</b> — 30 contributors and 30 releases
+        since 2017, and the only one that is not C#.
+      </p>
       <p class="meta">
         <span>TypeScript</span><span>MIT</span>
-        <span><span class="star">★ 303</span> stars</span><span>30 releases</span><span>30 contributors</span><span>last commit 2026-09-16</span><span>since 2017</span>
+        <span><span class="star">★ 303</span> stars</span><span>30 releases</span><span>30 contributors</span><span>since 2017</span>
       </p>
       <div class="links">
         <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/node-hp-scan-to/">manuc66.github.io/node-hp-scan-to</a></span>
@@ -263,9 +249,14 @@
         inspect search pipelines, from lexical BM25 to hybrid and reranked
         retrieval. The models stay in your application.
       </p>
+      <p class="note">
+        <b>Four packages, fourteen documentation pages, and six releases in the ten
+        days since it was created.</b> The models stay in your application: the
+        library provides the seams, you provide the model.
+      </p>
       <p class="meta">
         <span>C#</span><span>MIT</span>
-        <span><span class="star">★ 0</span> stars</span><span>6 releases</span><span>1 contributor</span><span>last commit 2026-09-28</span><span>net10.0</span>
+        <span><span class="star">★ 0</span> stars</span><span>6 releases</span><span>1 contributor</span><span>net10.0</span>
       </p>
       <div class="links">
         <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/LexiSharp/">manuc66.github.io/LexiSharp</a></span>
@@ -281,9 +272,14 @@
         models and transcribe audio from C#, or use the <code>transcribe</code>
         command-line tool. Runs on CPU, Vulkan and Metal.
       </p>
+      <p class="note">
+        <b>Binds transcribe.cpp v0.2.4</b>, whose native library is developed by the
+        transcribe.cpp authors. This project is the C# interop layer, the
+        high-level wrapper, the tool and the packaging.
+      </p>
       <p class="meta">
         <span>C#</span><span>MIT</span>
-        <span><span class="star">★ 1</span> stars</span><span>3 releases</span><span>3 contributors</span><span>last commit 2026-09-28</span><span>binds transcribe.cpp v0.2.4</span>
+        <span><span class="star">★ 1</span> stars</span><span>3 releases</span><span>3 contributors</span>
       </p>
       <div class="links">
         <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/TranscribeCppSharp/">manuc66.github.io/TranscribeCppSharp</a></span>
@@ -298,23 +294,31 @@
         Tag your images and have them organised into subdirectories based on those
         tags.
       </p>
+      <p class="note">
+        <b>No published release</b>, so there is nothing to install — build it from the
+        source. The only project here under a copyleft licence.
+      </p>
       <p class="meta">
         <span>C#</span><span>LGPL-3.0</span>
-        <span><span class="star">★ 2</span> stars</span><span>no releases</span><span>5 contributors</span><span>last commit 2026-09-16</span>
+        <span><span class="star">★ 2</span> stars</span><span>5 contributors</span>
       </p>
       <div class="links">
         <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/ImgTagFanOut/">manuc66.github.io/ImgTagFanOut</a></span>
         <span class="group"><span class="label">Source</span><a href="https://github.com/manuc66/ImgTagFanOut">GitHub</a></span>
-        <span class="group"><span class="label">Artifacts</span><span class="none">no published package — build from source</span></span>
+        <span class="group"><span class="label">Artifacts</span><span class="none">build from source</span></span>
       </div>
     </li>
 
     <li class="project" style="--accent:#be123c">
       <h3><span class="rank">6.</span><a href="https://github.com/manuc66/ChangeSharp">ChangeSharp</a></h3>
       <p class="desc">Changelog-driven semantic versioning for .NET. Derive the version, keep a changelog.</p>
+      <p class="note">
+        <b>Fifteen releases, the third-highest count of these six</b>, and two NuGet
+        packages: a CLI and an MCP server.
+      </p>
       <p class="meta">
         <span>C#</span><span>MIT</span>
-        <span><span class="star">★ 1</span> stars</span><span>15 releases</span><span>1 contributor</span><span>last commit 2026-08-22</span>
+        <span><span class="star">★ 1</span> stars</span><span>15 releases</span><span>1 contributor</span>
       </p>
       <div class="links">
         <span class="group"><span class="label">Docs</span><a href="https://manuc66.github.io/ChangeSharp/">manuc66.github.io/ChangeSharp</a></span>
@@ -326,12 +330,8 @@
 
   <footer>
     <p>
-      Counts are a snapshot taken on <b>2026-09-28</b>. Stars move continuously, so read
-      them as a snapshot rather than a live counter. “Last commit” is the most recent
-      commit, not <code>pushed_at</code> — which counts branch and tag pushes and
-      overstated three of these by up to three weeks. Version numbers are omitted on
-      purpose: each is right only until the next release. Served from
-      <a href="https://github.com/manuc66">github.com/manuc66</a>.
+      Counts are a snapshot taken on <b>2026-09-28</b>; stars move continuously. Served
+      from <a href="https://github.com/manuc66">github.com/manuc66</a>.
     </p>
   </footer>
 </main>
